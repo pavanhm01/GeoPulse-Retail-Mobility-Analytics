@@ -1,4 +1,3 @@
-
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -52,35 +51,103 @@ for customer_number in range(1, NUM_CUSTOMERS + 1):
 
     customer_id = f"CUST_{customer_number:04d}"
 
-    # Each customer has a starting location
-    base_latitude = CENTER_LATITUDE + random.uniform(-0.025, 0.025)
-    base_longitude = CENTER_LONGITUDE + random.uniform(-0.025, 0.025)
+    # Customer's home location
+    home_lat = CENTER_LATITUDE + random.uniform(-0.025, 0.025)
+    home_lon = CENTER_LONGITUDE + random.uniform(-0.025, 0.025)
+
+    # Find five nearby stores
+    nearby_stores = sorted(
+        stores,
+        key=lambda store: (
+            (store["latitude"] - home_lat) ** 2
+            + (store["longitude"] - home_lon) ** 2
+        )
+    )[:5]
 
     for day in range(NUM_DAYS):
 
         current_date = START_DATE + timedelta(days=day)
 
-        # Simulated active hours: 9 AM to 9 PM
-        for hour in range(9, 21):
+        # Select one nearby store for the day's visit
+        selected_store = random.choice(nearby_stores)
 
-            for minute in [0, 15, 30, 45]:
+        store_lat = selected_store["latitude"]
+        store_lon = selected_store["longitude"]
 
-                timestamp = current_date.replace(
-                    hour=hour,
-                    minute=minute
+        # Random travel and visit timings
+        departure_slot = random.randint(4, 12)
+        travel_slots = random.randint(1, 4)
+        arrival_slot = departure_slot + travel_slots
+
+        dwell_slots = random.randint(2, 8)
+        return_start = arrival_slot + dwell_slots
+
+        return_slots = random.randint(1, 4)
+        return_end = return_start + return_slots
+
+        # Generate 48 GPS records per day (9 AM to 9 PM)
+        for slot in range(48):
+
+            timestamp = current_date + timedelta(
+                hours=9,
+                minutes=slot * GPS_INTERVAL_MINUTES
+            )
+
+            # Phase 1: Customer stays near home
+            if slot < departure_slot:
+                latitude = home_lat
+                longitude = home_lon
+
+            # Phase 2: Customer travels to the store
+            elif slot < arrival_slot:
+                progress = (
+                    (slot - departure_slot + 1) / travel_slots
                 )
 
-                latitude = base_latitude + random.uniform(-0.003, 0.003)
-                longitude = base_longitude + random.uniform(-0.003, 0.003)
+                latitude = home_lat + (
+                    store_lat - home_lat
+                ) * progress
 
-                gps_records.append({
-                    "event_id": f"EVT_{len(gps_records) + 1:08d}",
-                    "customer_id": customer_id,
-                    "timestamp": timestamp,
-                    "latitude": latitude,
-                    "longitude": longitude,
-                    "accuracy_m": round(random.uniform(5, 30), 2)
-                })
+                longitude = home_lon + (
+                    store_lon - home_lon
+                ) * progress
+
+            # Phase 3: Customer stays near the store
+            elif slot < return_start:
+                latitude = store_lat
+                longitude = store_lon
+
+            # Phase 4: Customer travels back home
+            elif slot < return_end:
+                progress = (
+                    (slot - return_start + 1) / return_slots
+                )
+
+                latitude = store_lat + (
+                    home_lat - store_lat
+                ) * progress
+
+                longitude = store_lon + (
+                    home_lon - store_lon
+                ) * progress
+
+            # Phase 5: Customer stays near home
+            else:
+                latitude = home_lat
+                longitude = home_lon
+
+            # Add small GPS location variations
+            latitude += random.uniform(-0.00008, 0.00008)
+            longitude += random.uniform(-0.00008, 0.00008)
+
+            gps_records.append({
+                "event_id": f"EVT_{len(gps_records) + 1:08d}",
+                "customer_id": customer_id,
+                "timestamp": timestamp,
+                "latitude": latitude,
+                "longitude": longitude,
+                "accuracy_m": round(random.uniform(5, 30), 2)
+            })
 
 # ---------------- SAVE DATASETS ----------------
 

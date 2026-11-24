@@ -64,6 +64,8 @@ This project uses synthetic and anonymized mobility data. It does not require tr
 🚧 Initial setup and development in progress.
 ## Development Progress
 
+## Development Progress
+
 ### Day 1 – Synthetic GPS Data Generation ✅
 
 **Completed:**
@@ -72,20 +74,38 @@ This project uses synthetic and anonymized mobility data. It does not require tr
 - Generated 20 synthetic retail stores.
 - Simulated 7 days of GPS records.
 - Generated 336,000 GPS records.
-- Exported GPS mobility and retail store datasets into CSV files.
+- Exported GPS mobility and retail store datasets into CSV format.
 - Verified dataset structure and missing values.
 
-**Generated Datasets:**
+### Day 2 – Realistic GPS Movement Simulation ✅
 
-| Dataset | Records | Columns |
-|---|---:|---:|
-| GPS Mobility | 336,000 | 6 |
-| Retail Stores | 20 | 5 |
+**Completed:**
+- Improved the GPS data generator to simulate customer journeys.
+- Generated customer starting locations.
+- Simulated travel towards nearby retail stores.
+- Added store visit and dwell periods.
+- Simulated return journeys towards customer starting locations.
+- Added small GPS coordinate variations.
+- Verified customer movement using Pandas.
 
-**Technologies Used:** Python, Pandas.
+**Validation Results:**
 
-**Current Limitation:** Realistic customer movement between locations will be improved in subsequent development stages.
+| Validation | Result |
+|---|---:|
+| Total customers | 1,000 |
+| Total stores | 20 |
+| Total GPS records | 336,000 |
+| Records per customer | 336 |
+| GPS columns | 6 |
+| Unique positions for sample customer | 336 |
 
+**Technologies Used:** Python, Pandas, Random.
+
+**Note:** All customer movement and location data are synthetically generated.
+
+### Overall Project Status
+
+Development in progress.
 ### Overall Project Status
 
 🚧 Development in progress.
