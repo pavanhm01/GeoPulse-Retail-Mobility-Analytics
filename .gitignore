@@ -221,3 +221,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Generated datasets
+data/
+
+# Temporary backup files
+*_backup.py
