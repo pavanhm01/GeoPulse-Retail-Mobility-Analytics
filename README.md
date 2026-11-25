@@ -102,6 +102,34 @@ This project uses synthetic and anonymized mobility data. It does not require tr
 **Technologies Used:** Python, Pandas, Random.
 
 **Note:** All customer movement and location data are synthetically generated.
+### Day 3 – GPS Data Cleaning and Validation ✅
+
+**Completed:**
+- Created a Python preprocessing script using Pandas.
+- Loaded the raw GPS mobility dataset.
+- Checked and handled missing values.
+- Removed duplicate event IDs.
+- Converted timestamps into datetime format.
+- Validated latitude and longitude ranges.
+- Applied a GPS accuracy threshold of 0–100 metres.
+- Generated the cleaned GPS mobility dataset.
+- Saved the processed dataset in `data/processed/`.
+
+**Validation Results:**
+
+| Validation | Result |
+|---|---:|
+| Original records | 336,000 |
+| Cleaned records | 336,000 |
+| Missing values | 0 |
+| Duplicate event IDs | 0 |
+| Invalid timestamps | 0 |
+| Invalid coordinates | 0 |
+| Records removed | 0 |
+
+**Technologies Used:** Python, Pandas.
+
+**Output:** `data/processed/cleaned_gps_mobility.csv`
 
 ### Overall Project Status
 
