@@ -135,7 +135,27 @@ This project uses synthetic and anonymized mobility data. It does not require tr
 
 Development in progress.
 ### Overall Project Status
+## Week 1 Progress
 
+### Day 4 – Snowflake Database Setup
+- Created the `GEOPULSE_DB` database and `RETAIL_ANALYTICS` schema.
+- Created `GPS_MOBILITY` and `RETAIL_STORES` tables.
+- Configured Python connectivity using the Snowflake Connector and browser-based OAuth.
+- Created database connection and data-loading scripts.
+
+### Day 5 – Data Loading and Verification
+- Uploaded 336,000 cleaned GPS mobility records to Snowflake.
+- Uploaded 20 retail store records.
+- Verified both table record counts successfully.
+- Used chunked data loading with `write_pandas`.
+
+### Week 1 Summary
+- Generated synthetic GPS data for 1,000 customers across 7 days.
+- Simulated customer movement, store visits, dwell periods, and return journeys.
+- Cleaned and validated 336,000 GPS records.
+- Loaded and verified all records in Snowflake.
+
+**Note:** All GPS movement data is synthetic and created for this project. It does not represent real customer tracking.
 🚧 Development in progress.
 
 ## Author
