@@ -158,5 +158,29 @@ Development in progress.
 **Note:** All GPS movement data is synthetic and created for this project. It does not represent real customer tracking.
 🚧 Development in progress.
 
+
+############## Week 1 – Project Progress###################
+
+Successfully completed the initial data pipeline for GeoPulse.
+
+### Completed Work
+- Generated synthetic GPS data for 1,000 customers across 7 days.
+- Simulated customer movements and retail store visits.
+- Cleaned and validated 336,000 GPS records using Python and Pandas.
+- Created the Snowflake database and required tables.
+- Uploaded and verified 336,000 GPS records and 20 retail store records.
+
+### Technology Used
+Python | Pandas | Snowflake | SQL | Git | GitHub
+
+### Upcoming Work – Week 2
+- PySpark and Apache Sedona setup.
+- Spatial data processing.
+- Spatial joins.
+- Retail catchment area analysis.
+
+**Status:** Week 1 Completed | Week 2 Upcoming
+
+*Note: All GPS data is synthetically generated for this project.*
 ## Author
 Developed as part of the Infotact Solutions Data Analytics Internship.
